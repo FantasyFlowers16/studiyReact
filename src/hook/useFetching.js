@@ -4,11 +4,11 @@ export const useFetching = (callback) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
 
-  const fetching = async () => {
+  const fetching = async (...args) => {
     try{
       setIsLoading(true)
       console.log('fetching')
-      await callback()
+      await callback(...args)
     } catch(e) {
       console.log('fetching2')
       e.massage ? setError(e.massage) :setError(String(e))
@@ -16,7 +16,6 @@ export const useFetching = (callback) => {
       console.log('fetching2')
       setIsLoading(false)
     }
-
   }
   return [fetching, isLoading, error ]
 }
